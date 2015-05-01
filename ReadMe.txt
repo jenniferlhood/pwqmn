@@ -68,17 +68,18 @@ After all dependencies are installed, the program is launched using the pwqmn.py
 (typing: "python pwqmn.py") in the console. The program reads the config file and attempts to load the data in the specified locations. 
 If no station meta data file or station data files are found, the program quits as there is nothing to do. The program loads all of the specified data, thus some systems may not perform well if all data is loaded.
 
-The user generates a selection from among this data, produce summary stats and graphs on this selection.
+The user generates a selection from among the loaded data to produce summary stats and graphs.
 
 To see the available commands, use the <cmd> command by typing: cmd
+Note that currently the program is case sensitive.
 
-The rest of this guide will follow a mock workflow to generate some output, along with a detailed explanation.
+The rest of this guide will follow an example workflow to generate some output.
 
 To get started, two main selection types are required: Some stations must be chosen and some parameters must be chosen. These selections do not need to be made in any particular order. 
 
 To select some stations stations, use the <sel> ("select") command, followed by selection options. Currently users can select stations by the river they are situated on, and by their proximity to a city (those cities provided in the cities.txt file). 
 
-Here is the description of the sel command given by the program:
+Here is the description of the sel command found inside the program:
 
 ---------------------------------------------------------
 sel
@@ -97,7 +98,8 @@ Use: The select command. Select a subset of stations
 To select some stations within 50 km of Toronto, type the following: sel -city Toronto 50
 To select stations on a river, type the following sel -river Grand River
 
-After the select command, the program will display your current station selection. You are able to add to the selection or remove stations from the selection. Currently only adding stations by their respective rivers is supported, making another city selection removes the previous one. Future versions will expand the selection function.
+After the select command, the program will display your current station selection. You are able to add to the selection or remove stations from the selection. Currently, only adding stations by their respective rivers is supported, making another city selection removes the previous one. Future versions will expand the selection function.
+To add a river to the current selection, type: sel -add river Speed River
 
 To see which rivers and cities are available for selection, you can use the <ls> ("list") command. The current description of this command given in the program is as follows:
 
@@ -118,7 +120,6 @@ Use: list some aspects of the dataset
 So, to see the available cities, type: ls -ac
 To see the available rivers, type: ls -ar
 To see the rivers in the current selection, type ls -sr
-
 
 
 Secondly, some parameters must be selected. To see the available list of parameters, type: ls -ap
@@ -150,7 +151,7 @@ Use: The select parameters command. Select a subset of
  This will give you the list of parameter codes along with the number of observations made for that parameter in either the currently selected stations, or all stations if there are none selected.
  
  
- Now that some stations and parameters are selected, a graphs and summaries can be produced. use the command "graph" to produce some graphs. The follow graphs and options are currently available:
+ Now that some stations and parameters are selected, graphs and summaries can be produced. use the command "graph" to produce some graphs. The follow graphs and options are currently available:
  
 ---------------------------------------------------------
 graph
@@ -166,7 +167,7 @@ Use: produce graphs on selected sites and parameters
 ---------------------------------------------------------
 
 To generate a boxplot separated by the month of observation, type: graph -box m test
-in this example, we have two parameters selected (PPUT and ALKT), and all stations on the Grand River. The boxplot command will generate one plot per parameter, with one box per month of collection. These plots will be stored in the main directory under the specified file name ("test", in this example), with the parameter and plot type appended to the name. Subsequent calls to the the graph -box m command with the same file name will overwrite the existing graphs.
+in this example, we have two parameters selected (PPUT and ALKT), and all stations on the Grand River and Speed River. The boxplot command will generate one plot per parameter, with one box per month of collection. These plots will be stored in the main directory under the specified file name ("test", in this example), with the parameter and plot type appended to the name. Subsequent calls to the the graph -box m command with the same file name will overwrite the existing graphs.
 
 To generate a scatter plot of these two selected parameters, type: graph -scatter test
 Scatter plots can only be generated when at least two parameters are selected.
