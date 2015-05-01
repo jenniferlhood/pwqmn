@@ -2,9 +2,11 @@
 the Provincial Water Quality Monitoring Network Data Utility
 ============================================================
 
+
 v 0.1 (beta)
 By Jennifer L A Hood, PhD
 created April 30, 2015
+
 
 
 Description:
@@ -22,11 +24,13 @@ The PWQMN dataset currently contains roughly 100 chemical, biological and physic
 As the data is published near-annually as it becomes available, in Microsoft Excel spreadsheets (and Microsoft Access databases), and due to the format of the row entries of the data, I have found that data exploration strictly using Microsoft products is not productive, and extracting very specific pieces of information is time consuming and prone to errors. Thus I have developed a tool which provides easy access to the dataset for extracting some basic and specific information useful in data exploration and data mining. Future updates to this program will build on these basics and increase the statiscal and graphical tools available to users.
 
 
+
+
 The program:
 ---------------
 
-
 Currently, the program is a python script that interfaces with R. Currently anyone wishing to use this program must have the following:
+
 
 Dependencies:
 
@@ -35,10 +39,12 @@ Dependencies:
 - R (statistical programming language)
 - The R library: ggplot2 (http://ggplot2.org/)
 
+
 Data:
 
 - PWQMN files converted to .csv (the program does not read .xls files)
 - PWQMN station file (includes station metadata)
+
 
 The version of this program will have these dependency issues removed. Some test data is provided with the program, however users are encouraged to visit the MOE website to obtain the current data files (http://www.ontario.ca/data/provincial-stream-water-quality-monitoring-network)
 
@@ -51,6 +57,8 @@ pwqmn_data.py		contains the data class files.
 cities.txt		a list of cities used by the program.
 config.txt		specifies the location of the data files. 
 					-Must be augmented as data is downloaded				   
+
+
 
 
 How To Use
