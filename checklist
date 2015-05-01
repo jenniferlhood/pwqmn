@@ -1,17 +1,22 @@
 Checklist for next version:
-
-- import and test for all data
+(in the order that I will probably do them)
 
 Program should have:
-- implement year selection option
+--------------------
+- implement export of selected data table (so can imported to R separately)
+- implement year selection option in program
+- implement append cities options (in sel)
 - implement select all parameters option (in sparm)
 - implement select all stations option (in sel)
 - verbose option for list (ls) command. See site descriptions, 
-	lat and lon, paramter descriptions and units
-- round summary stats based on significant digits
+	lat and lon, parameter descriptions and units
 
+- round summary stats based on significant digits
+- no requirement for dependents
+- do not load all data into memory. Start by loading only what is selected.
 
 Nice to have:
+--------------
 - no case sensitivity
 - put summary stats on graphs
 - append cities to selection (instead of only generating a new selection)

@@ -40,27 +40,43 @@ class program():
 
 		if noSitesFlag == noDataFlag == False:
 			#add the site data
-			self.allData = allStationData(sites)
-			self.msgList.append("Site data loaded.")
-			
+			try:
+				self.allData = allStationData(sites)
+				self.msgList.append("Site data loaded.")
+			except IOError:
+				self.msgList.append("File " +site+ " not found. Check loation.")
+				noSitesFlag == True
+				
 			##add all the data to each site
 			for i in dataList:
-				self.allData.getStationData(i)
-				self.msgList.append("Data from "+i+" loaded.")
+				try:
+					self.allData.getStationData(i)
+					self.msgList.append("Data from "+i+" loaded.")
+					noDataFlag = False
+				except IOError:
+					self.msgList.append("File " +i+ " not found. Check loation.")
+					noDataFlag = True
+					
 			##Reorganize data
 			self.allData.allReorganize()
 		
-		else:
-			if noSitesFlag == True:	
-				self.msgList.append("No Site data found,check config.txt or file location.")
-			if noDataFlag == True:	
-				self.msgList.append("No water quality data found, check config.txt or file location.")
 		
-		if noCitiesFlag == False:
-			self.allData.getCities(cities)
-			self.msgList.append("Cities loaded.")
-		else:
-			self.msgList.append("No cities found, check config.txt or file location.")
+		if noSitesFlag == True:	
+			self.msgList.append("No Site data found,check config.txt")
+			self.alldata = None
+				
+		if noDataFlag == True:	
+			self.msgList.append("No water quality data found, check config.txt")
+			self.allData = None
+		if self.allData != None and noCitiesFlag == False:
+			try:
+				self.allData.getCities(cities)
+				self.msgList.append("Cities loaded.")
+			except IOError:
+				self.msgList.append("File " + cities + " not found. Check loation.")
+		
+		elif noCitiesFlag == True:
+			self.msgList.append("No cities found, check config.txt")
 	
 	""" ------------------------------------------------------------
 	The list command. 

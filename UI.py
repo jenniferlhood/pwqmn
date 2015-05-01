@@ -1,6 +1,5 @@
 #provides messages to user, checks that proper input has been provided for each command
 def messages(msgList):
-	print ""
 	for i in msgList:
 		print i
 	print ""
@@ -28,11 +27,9 @@ def ls(parm): #parameter will be a dict
 		print "     the following options are available:"
 		print ""
 		print "   -as \t\t to list all available stations"
-		print "   -ss \t\t to list selected sations"
+		print "   -ss \t\t to list selected stations"
 		print "   -ap \t\t to list all available parameters"
 		print "   -sp \t\t to list the selected parameters"
-		print "   -ay \t\t to list all available years"
-		print "   -sy \t\t to list the selected years"
 		print "   -ar \t\t to list all rivers"
 		print "   -sr \t\t to list rivers of selected stations"
 		print "   -ac \t\t to list all available cities"
@@ -85,7 +82,7 @@ def sel(parm): #parameter will be a list
 		print "   -add <river> \t append river selection"
 		print "   -rem <river> \t remove river from  selection"
 		print "   -rem zero \t\t remove stations with zero observations"
-		print "   -rem x \t\t remove stations with less than xobervations" 
+		print "   -rem x \t\t remove stations with less than x observations" 
 		print "   -city <city> <x> \t all sites x kms from city"
 		print ""
 	else:
@@ -97,7 +94,7 @@ def sparm(parm):
 		print "---------------------------------------------------------"
 		print "sparm"
 		print "Use: The select parameters command. Select a subset of"
-		print "     parameters from among all available paramters. Stats"
+		print "     parameters from among all available parameters. Stats"
 		print "     and graphs are produced on selected parameters."
 		print "	  the following options are available: "
 		print ""
@@ -128,13 +125,13 @@ def graph(parm):
 		print "graph"
 		print "Use: produce graphs on selected sites and parameters"
 		print ""
-		print "   -bar all <filename> \t\t bar plot of number of observationss"
+		print "   -bar all <filename> \t\t bar plot of number of observations"
 		print "   -bar river <filename> \t bar plots by river"
 		print "   -hist <filename> \t\t histograms for selected parameters"
 		print "   -box m <filename>  \t\t box plots by month"
 		print "   -box y <filename>  \t\t box plots by year"
 		print "   -box r <filename>  \t\t box plots by river (all dates)"
-		print "   -scatter <filename> \t\t scatter plots for paramters"
+		print "   -scatter <filename> \t\t scatter plots for parameters"
 		print ""
 	else:
 		messages(parm)
