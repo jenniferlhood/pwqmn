@@ -190,7 +190,7 @@ If two or more parameters are in the selection, a pearson's correlation will be 
 
 To end the session, type q
 
-To see what is coming in future versions, see the checklist. To make suggestions, report bugs or to otherwise comment on this program, please contact me the address listed on my github profile.
+To see what is coming in future versions, see the checklist. To make suggestions, report bugs or to otherwise comment on this program, please contact me at the email address listed on my github profile.
 
 
 
