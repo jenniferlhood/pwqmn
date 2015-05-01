@@ -1,0 +1,19 @@
+Checklist for next version:
+
+- import and test for all data
+
+Program should have:
+- implement year selection option
+- implement select all parameters option (in sparm)
+- implement select all stations option (in sel)
+- verbose option for list (ls) command. See site descriptions, 
+	lat and lon, paramter descriptions and units
+- round summary stats based on significant digits
+
+
+Nice to have:
+- no case sensitivity
+- put summary stats on graphs
+- append cities to selection (instead of only generating a new selection)
+
+
