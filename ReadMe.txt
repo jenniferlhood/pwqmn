@@ -29,7 +29,7 @@ As the data is published near-annually as it becomes available, in Microsoft Exc
 The program:
 ---------------
 
-Currently, the program is a python script that interfaces with R. Currently anyone wishing to use this program must have the following:
+Currently, the program is a python script that interfaces with R. Anyone wishing to use this program must have the following:
 
 
 Dependencies:
@@ -48,7 +48,7 @@ Data:
 
 The version of this program will have these dependency issues removed. Some test data is provided with the program, however users are encouraged to visit the MOE website to obtain the current data files (http://www.ontario.ca/data/provincial-stream-water-quality-monitoring-network)
 
-The program files are the following:
+The program and supporting files are the following:
 
 pwqmn.py			to launch the program
 pwqmn_prog.py		the command line program providing user interaction
