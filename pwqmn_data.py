@@ -115,7 +115,7 @@ class station():
 	""" 
 	The PWQMN data comes organized where each parameter is listed as an obervation, 
 	each observation a row.	Each sampling date, multiple paramters are measured 
-	at each station, but not every parameter at every stationat each sampling date.
+	at each station, but not every parameter at every station at each sampling date.
 	This means there are from 0 to ~190 observations made for any given date and station.
 	Thus, data reorganization and replacement of missing values with Null entries 
 	is necessary for paired sample stats and graphs.
@@ -123,7 +123,7 @@ class station():
 	 The new observation dictionary follows a specified format such that data associated
 	 with each paramter can be accessed using the paramter as the key:
 	 	
-	 	{[parm]:[[date, fid, result, unit, method, station],[]...[]] 
+	 	{[parm]:[[date, fid, result, unit, method, station],[],...,[]] 
 	"""
 	
 	def parmToCols(self):
@@ -391,6 +391,7 @@ class allStationData():
 	
 	def removeRiver(self, other, river):
 		toDelete = {}
+		
 		if river in other.countAllRivers():
 			for i in other.stationDict:
 				if other.stationDict[i].name == river:
@@ -550,19 +551,7 @@ class allStationData():
 	"""------------------------------------------------
 	Methods to change the selected parameters and years
 	------------------------------------------------"""
-	#qsort increasing: removes nulls and NA objects
-	def sort1(list1):
-		if len(list1) == 1:
-			return list1
-		else:
-			partition = len(list1)/2
-			one = list1[0:part]
-			two = list1[part:]
-			if one[0] < two[0]:
-				return sort1(one) + sort1(two)
-			else:
-				return sort1(two) + sort1(one)
-		
+
 		
 	def selectTopParm(self,n):
 		self.selectParm = self.topParm(n).keys()	
