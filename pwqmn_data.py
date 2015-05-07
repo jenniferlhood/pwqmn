@@ -3,7 +3,7 @@ import csv
 import sys, os
 import warnings
 
-from collections import Counter
+from collections import Counter, defaultdict
 from contextlib import contextmanager
 from math import radians, cos, sin, asin, sqrt,log
 from random import choice
@@ -238,6 +238,7 @@ class allStationData():
 		self.selectParm = []
 		self.selectYear = []
 		self.cityDict = {}
+		self.stationDict2 = defaultdict
 		
 		if stFileName != None:		
 			with open(stFileName) as csvfile:
@@ -254,11 +255,19 @@ class allStationData():
 		with open(fileName) as csvfile:
 			allData = csv.reader(csvfile, delimiter = ",", quotechar = '"')
 			for row in allData:
-				if row[0] != 'STATION': # don't add the headers to the data
+				if row[0] != 'STATION' and row[0] != "STATION_NO": # don't add the headers to the data
 					#create a list of the current row to add to the current station
 					#in order: PARAM,DATE,RESULT,FID,REMARK,METHOD,UNIT
-					rowList = [row[1],row[3],float(row[7]),row[5],row[6],row[9],row[10],row[0]]
-					self.stationDict[int(row[0])].add_data(rowList)
+					try:
+						rowList = [row[1],row[3],float(row[7]),row[5],row[6],row[9],row[10],row[0]]
+
+					except ValueError:
+						try:
+							rowList = [row[1],row[3],float(row[6]),row[5],row[7],row[9],row[10],row[0]]
+						except ValueError:
+							print "cannot parse:" + str([row[0],row[1],row[2],row[3],row[4],row[5]]) + "..."
+					if int(row[0]) in self.stationDict:
+						self.stationDict[int(row[0])].add_data(rowList)
 	
 	def getCities(self,filename):
 		cityfile=open(filename).read().split('\n')
@@ -551,7 +560,8 @@ class allStationData():
 	"""------------------------------------------------
 	Methods to change the selected parameters and years
 	------------------------------------------------"""
-
+	def selectAllParm(self):
+		self.selectParm =  list(self.setOfParms())
 		
 	def selectTopParm(self,n):
 		self.selectParm = self.topParm(n).keys()	
@@ -680,6 +690,32 @@ class allStationData():
 		#return the correlation coeeficient and the p-value as extracted from the resulting matrix
 		return cor[0][1],cor[2][1]
 		
+	#method do run pearson's correlation on selected paramters
+	# returns a dictionary with correlations having p-values lower
+	# than 0.05.	
+	
+	def pearsonsAll(self):
+		parmcount = self.countSelectParm()
+		pearsonsDict = {}
+		pearsonsSigDict = {}
+		
+		for i in self.selectParm:
+			for j in self.selectParm:
+				if i != j and i in parmcount and j in parmcount:
+					if parmcount[i] > 0 and parmcount[j] > 0:
+						pearsonsDict[i+" vs "+j] = self.pearsons(i,j)
+						
+		
+		for i in pearsonsDict:
+			if pearsonsDict[i][1] <=0.05:
+				
+				pearsonsSigDict[i] = pearsonsDict[i]
+		
+		return pearsonsSigDict
+			
+			
+			
+			
 	#produce a summary of selected data to be printed to
 	# screen or to file. Returns a dict with the following:
 	# {[Parm]:[n,mean, median, standard deviation]}
@@ -745,6 +781,7 @@ class allStationData():
 			
 		for j in self.stationDict:
 			count = 0 #counts the number of sampling dates at each site
+			
 			
 			for i in self.selectParm:
 
@@ -826,7 +863,8 @@ class allStationData():
 		
 		if self.selectParm != None:
 			for i in self.selectParm:
-				selectedParmDict[i] = allParm[i]
+				if i in allParm:		
+					selectedParmDict[i] = allParm[i]
 					
 		vectorDict['Parameter'] = robjects.StrVector(selectedParmDict.keys())
 		vectorDict['Count'] = robjects.IntVector(selectedParmDict.values())
@@ -1015,7 +1053,6 @@ class allStationData():
 				f.write(i + "," + str(rivers[i]) + "\n")
 		f.close()
 		
-					
-			
+	
 	
 
