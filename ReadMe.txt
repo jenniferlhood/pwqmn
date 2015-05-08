@@ -56,7 +56,7 @@ UI.py			the current command line display
 pwqmn_data.py		contains the data class files.
 cities.txt		a list of cities used by the program.
 config.txt		specifies the location of the data files. 
-		-Must be updated with path to data
+			-Must be updated with path to data
 
 
 
