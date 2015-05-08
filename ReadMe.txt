@@ -50,13 +50,13 @@ Data:
 
 The program and supporting files are the following:
 
-pwqmn.py			to launch the program
+pwqmn.py		to launch the program
 pwqmn_prog.py		the command line program providing user interaction
-UI.py				the current command line display
+UI.py			the current command line display
 pwqmn_data.py		contains the data class files.
 cities.txt		a list of cities used by the program.
 config.txt		specifies the location of the data files. 
-						-Must be augmented as data is downloaded				   
+				-Must be augmented as data is downloaded				   
 
 
 
